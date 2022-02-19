@@ -3,7 +3,6 @@
 int main()
 {
     int n;
-    n = 3;
     scanf("%d", &n);
 
     int qtd_potencias = 0;
