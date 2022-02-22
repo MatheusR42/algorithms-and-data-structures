@@ -1,12 +1,21 @@
 #include <stdio.h>
 // #include "qtd_palavras_frase.h"
 
+int isText(char c)
+{
+    if (c == ' ' || c == '.' || c == ',')
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
 void imprimir_qtd_palavras(char texto[])
 {
     int aux = 0;
     int qtd = 0;
-    int lastIsSpace = 0;
-    int firstSentence = 1;
+    int inText = 0;
 
     while (1)
     {
@@ -16,32 +25,20 @@ void imprimir_qtd_palavras(char texto[])
             break;
         }
 
-        if (texto[aux] == ' ' && lastIsSpace == 0)
+        if (inText == 0 && isText(texto[aux]) == 1)
         {
-            lastIsSpace = 1;
-            qtd++;
+            inText = 1;
         }
-        else
+
+        if (inText == 1 && isText(texto[aux]) == 0)
         {
-            lastIsSpace = 0;
+            inText = 0;
+            qtd++;
         }
 
         if (texto[aux] == '.')
         {
-            if (lastIsSpace == 1)
-            {
-                printf("%d\n", qtd - 1);
-            }
-            else if (firstSentence == 1)
-            {
-                firstSentence = 0;
-                printf("%d\n", qtd + 1);
-            }
-            else
-            {
-                printf("%d\n", qtd);
-            }
-
+            printf("%d\n", qtd);
             qtd = 0;
         }
         aux++;
