@@ -98,6 +98,18 @@ void insere_disciplina(Curso *curso, Disciplina *nova_disciplina)
         curso->ultima_disciplina->requisito->requisito->requisito->requisito->requisito = nova_disciplina;
         return;
     }
+
+    // Disciplina *d2 = curso->ultima_disciplina->requisito;
+    // while (d2 != NULL)
+    // {
+    //     if (compara_strings(d2->nome, nova_disciplina->nome) > 0)
+    //     {
+    //         nova_disciplina->requisito = d2->requisito;
+    //         d2->requisito = nova_disciplina;
+    //         return;
+    //     }
+    //     d2 = d2->requisito;
+    // }
 }
 
 // --- Input ---
