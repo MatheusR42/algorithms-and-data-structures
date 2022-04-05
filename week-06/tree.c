@@ -48,6 +48,63 @@ void imprimir(NoArvore *raiz, int profundidade)
     imprimir(raiz->esq, profundidade + 1);
 }
 
+int get_min(NoArvore *raiz)
+{
+    if (raiz->esq == NULL)
+    {
+        return raiz->chave;
+    }
+    else
+    {
+        return get_min(raiz->esq);
+    }
+}
+
+NoArvore *remover(NoArvore *raiz, int chave)
+{
+    if (raiz == NULL)
+    {
+        return NULL;
+    }
+
+    if (chave < raiz->chave)
+    {
+        raiz->esq = remover(raiz->esq, chave);
+    }
+    else if (chave > raiz->chave)
+    {
+        raiz->dir = remover(raiz->dir, chave);
+    }
+    else
+    {
+        if (raiz->esq == NULL && raiz->dir == NULL)
+        {
+            free(raiz);
+            return NULL;
+        }
+
+        if (raiz->esq == NULL)
+        {
+            NoArvore *arvDir = raiz->dir;
+            free(raiz);
+            return arvDir;
+        }
+
+        if (raiz->dir == NULL)
+        {
+            NoArvore *arvEsq = raiz->esq;
+            free(raiz);
+            return arvEsq;
+        }
+
+        int sucessor = get_min(raiz->dir);
+        raiz->chave = sucessor;
+        raiz->dir = remover(raiz->dir, sucessor);
+    }
+
+    return raiz;
+}
+
 int main()
 {
     NoArvore *tree = NULL;
@@ -60,5 +117,9 @@ int main()
     tree = inserir(tree, 0);
 
     imprimir(tree, 0);
+    printf("\n--------------\n");
+    tree = remover(tree, 5);
+    imprimir(tree, 0);
+
     return 0;
 }
