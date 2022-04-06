@@ -1,6 +1,7 @@
-ddddddddddd
+#include <stdlib.h>
+#include <stdio.h>
 
-    typedef struct NoArvore NoArvore;
+typedef struct NoArvore NoArvore;
 struct NoArvore
 {
     int chave;
