@@ -60,6 +60,90 @@ int get_min(NoArvore *raiz)
     }
 }
 
+int maior(NoArvore *raiz)
+{
+    if (raiz == NULL)
+    {
+        return -1;
+    }
+
+    if (raiz->dir == NULL)
+    {
+        return raiz->chave;
+    }
+    else
+    {
+        return maior(raiz->dir);
+    }
+}
+
+void percurso_emordem(NoArvore *raiz)
+{
+    if (raiz == NULL)
+    {
+        return;
+    }
+
+    percurso_emordem(raiz->esq);
+    printf("%d ", raiz->chave);
+    percurso_emordem(raiz->dir);
+}
+
+void numero_nos2(NoArvore *raiz, int *num)
+{
+    if (raiz == NULL)
+    {
+        return;
+    }
+    *num = *num + 1;
+
+    numero_nos2(raiz->esq, num);
+    numero_nos2(raiz->dir, num);
+}
+
+void numero_nos_folha2(NoArvore *raiz, int *num)
+{
+    if (raiz == NULL)
+    {
+        return;
+    }
+
+    if (raiz->esq == NULL && raiz->dir == NULL)
+    {
+        *num = *num + 1;
+    }
+
+    numero_nos_folha2(raiz->esq, num);
+    numero_nos_folha2(raiz->dir, num);
+}
+
+int numero_nos(NoArvore *raiz)
+{
+    int *num = malloc(sizeof(int));
+
+    numero_nos2(raiz, num);
+    int result = *num;
+    free(num);
+
+    return result;
+}
+
+int numero_nos_folha(NoArvore *raiz)
+{
+    int *num = malloc(sizeof(int));
+
+    numero_nos_folha2(raiz, num);
+    int result = *num;
+    free(num);
+
+    return result;
+}
+
+int numero_nos_internos(NoArvore *raiz)
+{
+    return numero_nos(raiz) - numero_nos_folha(raiz);
+}
+
 NoArvore *remover(NoArvore *raiz, int chave)
 {
     if (raiz == NULL)
@@ -118,6 +202,15 @@ int main()
 
     imprimir(tree, 0);
     printf("\n--------------\n");
+    percurso_emordem(tree);
+    printf("\n--------------\n");
+    printf("%d ", numero_nos(tree));
+    printf("\n--------------\n");
+    printf("%d ", numero_nos_folha(tree));
+    printf("\n--------------\n");
+    printf("%d ", numero_nos_internos(tree));
+    printf("\n--------------\n");
+
     tree = remover(tree, 5);
     imprimir(tree, 0);
 
