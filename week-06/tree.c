@@ -48,6 +48,27 @@ void imprimir(NoArvore *raiz, int profundidade)
     imprimir(raiz->esq, profundidade + 1);
 }
 
+NoArvore *buscaNo(NoArvore *raiz, int key)
+{
+    if (raiz == NULL)
+    {
+        return NULL;
+    }
+
+    if (key == raiz->chave)
+    {
+        return raiz;
+    }
+    else if (key < raiz->chave)
+    {
+        return buscaNo(raiz->esq, key);
+    }
+    else
+    {
+        return buscaNo(raiz->dir, key);
+    }
+}
+
 int get_min(NoArvore *raiz)
 {
     if (raiz->esq == NULL)
@@ -203,7 +224,8 @@ int main()
     imprimir(tree, 0);
     printf("\n--------------\n");
     percurso_emordem(tree);
-    printf("\n--------------\n");
+    abb_chaves_comuns.c
+        printf("\n--------------\n");
     printf("%d ", numero_nos(tree));
     printf("\n--------------\n");
     printf("%d ", numero_nos_folha(tree));
