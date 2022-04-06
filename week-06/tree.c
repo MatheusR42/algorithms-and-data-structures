@@ -224,8 +224,7 @@ int main()
     imprimir(tree, 0);
     printf("\n--------------\n");
     percurso_emordem(tree);
-    abb_chaves_comuns.c
-        printf("\n--------------\n");
+    printf("\n--------------\n");
     printf("%d ", numero_nos(tree));
     printf("\n--------------\n");
     printf("%d ", numero_nos_folha(tree));
