@@ -1,7 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
+ddddddddddd
 
-typedef struct NoArvore NoArvore;
+    typedef struct NoArvore NoArvore;
 struct NoArvore
 {
     int chave;
@@ -67,6 +66,18 @@ NoArvore *buscaNo(NoArvore *raiz, int key)
     {
         return buscaNo(raiz->dir, key);
     }
+}
+
+void liberar_arvore(NoArvore *raiz)
+{
+    if (raiz == NULL)
+    {
+        return;
+    }
+
+    liberar_arvore(raiz->esq);
+    liberar_arvore(raiz->dir);
+    free(raiz);
 }
 
 int get_min(NoArvore *raiz)
