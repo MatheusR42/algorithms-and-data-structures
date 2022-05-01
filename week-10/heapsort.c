@@ -55,7 +55,7 @@ void heap_sort(int *v, int n)
 {
     build_max_heap(v, n);
 
-    for (int i = n - 1; i > 0; i--)
+    for (int i = n - 1; i >= 0; i--)
     {
         int aux = v[0];
         v[0] = v[i];
